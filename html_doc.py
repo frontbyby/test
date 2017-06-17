@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-
+import re
 html_doc = """
 <html><head><title>The Dormouse's story</title></head>
 <body>
@@ -20,3 +20,13 @@ soup = BeautifulSoup(html_doc, 'html.parser', from_encoding='utf-8')
 links = soup.find_all('a')
 for link in links:
     print(link)
+
+link_node = soup.find('a', href="http://example.com/tillie")
+print(link_node.get_text())
+
+# regexe
+link_node = soup.find('a', href=re.compile(r"ill"))
+print(link_node.get_text());
+
+link_node = soup.find('p', class_="title")
+print(link_node.get_text())
